@@ -223,7 +223,6 @@ public class WndSettings extends WndTabbed {
 		CheckBox chkLandscape;
         CheckBox chkVSync;
 		ColorBlock sep2;
-		//ColorBlock sepX;
 		OptionSlider optFramerate;
 		OptionSlider optBrightness;
 		OptionSlider optVisGrid;
@@ -265,9 +264,6 @@ public class WndSettings extends WndTabbed {
 
 			if (DeviceCompat.isDesktop())
 			{
-				//sepX = new ColorBlock(1, 1, 0xFF000000);
-				//add(sepX);
-
 				chkVSync = new CheckBox("VSync") { //TODO: Messages.get(this, "vsync"))
 					@Override
 					protected void onClick() {
@@ -357,20 +353,10 @@ public class WndSettings extends WndTabbed {
 
 			bottom = sep1.y + 1;
 
-			/*
-			chkFullscreen.setRect(0, bottom+GAP, width/2-GAP/2, BTN_HEIGHT);
-			chkVSync.setRect(width/2 + GAP/2, bottom+GAP, width/2-GAP/2 , BTN_HEIGHT);
-			bottom = chkVSync.bottom();
-			*/
-
 			chkFullscreen.setRect(0, bottom+GAP, width, BTN_HEIGHT);
 			bottom = chkFullscreen.bottom();
 
-			if ( /*sepX != null &&*/ chkVSync != null && optFramerate != null ) {
-				//sepX.size(width, 1);
-				//sepX.y = bottom + GAP;
-				//bottom = sepX.y + 1;
-
+			if ( chkVSync != null && optFramerate != null ) {
 				chkVSync.setRect(0, bottom+GAP, width/2-GAP/2, SLIDER_HEIGHT);
 				optFramerate.setRect(width/2 + GAP/2, bottom+GAP, width/2-GAP/2 , SLIDER_HEIGHT);
 				bottom = optFramerate.bottom();
