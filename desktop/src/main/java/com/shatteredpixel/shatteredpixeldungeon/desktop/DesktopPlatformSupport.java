@@ -88,6 +88,15 @@ public class DesktopPlatformSupport extends PlatformSupport {
 					Point p = SPDSettings.windowResolution();
 					Gdx.graphics.setWindowedMode( p.x, p.y );
 				}
+
+                if (SPDSettings.vsync()) {
+                    Gdx.graphics.setVSync(true);
+                } else {
+                    Gdx.graphics.setVSync(false);
+				}
+
+				Gdx.graphics.setForegroundFPS(SPDSettings.framerate() * 30);
+
 				first = false;
 			}
 		} );

@@ -221,7 +221,10 @@ public class WndSettings extends WndTabbed {
 		ColorBlock sep1;
 		CheckBox chkFullscreen;
 		CheckBox chkLandscape;
+        CheckBox chkVSync;
 		ColorBlock sep2;
+		//ColorBlock sepX;
+		OptionSlider optFramerate;
 		OptionSlider optBrightness;
 		OptionSlider optVisGrid;
 		OptionSlider optFollowIntensity;
@@ -259,6 +262,32 @@ public class WndSettings extends WndTabbed {
 				chkFullscreen.enable(false);
 			}
 			add(chkFullscreen);
+
+			if (DeviceCompat.isDesktop())
+			{
+				//sepX = new ColorBlock(1, 1, 0xFF000000);
+				//add(sepX);
+
+				chkVSync = new CheckBox("VSync") { //TODO: Messages.get(this, "vsync"))
+					@Override
+					protected void onClick() {
+						super.onClick();
+						SPDSettings.vsync(checked());
+					}
+				};
+				chkVSync.checked(SPDSettings.vsync());
+				add(chkVSync);
+
+				optFramerate = new OptionSlider("Framerate", //TODO: Messages.get(...)
+						"30", "120", 1, 4) {
+					@Override
+					protected void onChange() {
+						SPDSettings.framerate(getSelectedValue());
+					}
+				};
+				optFramerate.setSelectedValue(SPDSettings.framerate());
+				add(optFramerate);
+			}
 
 			if (DeviceCompat.isAndroid()) {
 				chkLandscape = new CheckBox(Messages.get(this, "landscape")) {
@@ -328,8 +357,24 @@ public class WndSettings extends WndTabbed {
 
 			bottom = sep1.y + 1;
 
-			chkFullscreen.setRect(0, bottom + GAP, width, BTN_HEIGHT);
+			/*
+			chkFullscreen.setRect(0, bottom+GAP, width/2-GAP/2, BTN_HEIGHT);
+			chkVSync.setRect(width/2 + GAP/2, bottom+GAP, width/2-GAP/2 , BTN_HEIGHT);
+			bottom = chkVSync.bottom();
+			*/
+
+			chkFullscreen.setRect(0, bottom+GAP, width, BTN_HEIGHT);
 			bottom = chkFullscreen.bottom();
+
+			if ( /*sepX != null &&*/ chkVSync != null && optFramerate != null ) {
+				//sepX.size(width, 1);
+				//sepX.y = bottom + GAP;
+				//bottom = sepX.y + 1;
+
+				chkVSync.setRect(0, bottom+GAP, width/2-GAP/2, SLIDER_HEIGHT);
+				optFramerate.setRect(width/2 + GAP/2, bottom+GAP, width/2-GAP/2 , SLIDER_HEIGHT);
+				bottom = optFramerate.bottom();
+			}
 
 			if (chkLandscape != null) {
 				chkLandscape.setRect(0, bottom + GAP, width, BTN_HEIGHT);

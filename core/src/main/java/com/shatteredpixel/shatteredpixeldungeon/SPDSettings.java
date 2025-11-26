@@ -49,6 +49,8 @@ public class SPDSettings extends GameSettings {
 	
 	//Display
 	
+	public static final String KEY_VSYNC		= "vsync";
+	public static final String KEY_FRAMERATE	= "framerate";
 	public static final String KEY_FULLSCREEN	= "fullscreen"; //used to hide navbars on mobile
 	public static final String KEY_LANDSCAPE	= "force_landscape";
 	public static final String KEY_ZOOM			= "zoom";
@@ -56,6 +58,24 @@ public class SPDSettings extends GameSettings {
 	public static final String KEY_GRID 	    = "visual_grid";
 	public static final String KEY_CAMERA_FOLLOW= "camera_follow";
 	public static final String KEY_SCREEN_SHAKE = "screen_shake";
+
+	public static void vsync( boolean value ) {
+		put( KEY_VSYNC, value );
+		ShatteredPixelDungeon.updateSystemUI();
+	}
+
+	public static boolean vsync() {
+		return getBoolean( KEY_VSYNC, false );
+	}
+
+	public static void framerate( int value ) {
+		put( KEY_FRAMERATE, value );
+		ShatteredPixelDungeon.updateSystemUI();
+	}
+
+	public static int framerate() {
+		return getInt( KEY_FRAMERATE, 1 );
+	}
 	
 	public static void fullscreen( boolean value ) {
 		put( KEY_FULLSCREEN, value );
