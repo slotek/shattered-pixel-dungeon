@@ -264,7 +264,7 @@ public class WndSettings extends WndTabbed {
 
 			if (DeviceCompat.isDesktop())
 			{
-				chkVSync = new CheckBox("VSync") { //TODO: Messages.get(this, "vsync"))
+				chkVSync = new CheckBox("VSync") {
 					@Override
 					protected void onClick() {
 						super.onClick();
@@ -274,8 +274,8 @@ public class WndSettings extends WndTabbed {
 				chkVSync.checked(SPDSettings.vsync());
 				add(chkVSync);
 
-				optFramerate = new OptionSlider("Framerate", //TODO: Messages.get(...)
-						"30", "120", 1, 4) {
+                // TODO: Translate frame rate message
+				optFramerate = new OptionSlider("Frame Rate", "30", "120", 1, 4) {
 					@Override
 					protected void onChange() {
 						SPDSettings.framerate(getSelectedValue());
